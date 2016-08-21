@@ -76,7 +76,7 @@
 								<img class="nav-user-photo" src="<?php echo __ROOT__; ?>/Admin/View/Public/avatars/user.jpg" alt="Jason's Photo" />
 								<span class="user-info">
 									<small>Welcome,</small>
-									Jason
+									<?php echo $_SESSION['username']; ?>
 								</span>
 
 								<i class="icon-caret-down"></i>
@@ -206,7 +206,7 @@
                     </a>
                 </li>
                 <li class="active">
-                    添加栏目
+                    栏目列表
                 </li>
             </ul>
             <!-- .breadcrumb -->
@@ -214,42 +214,60 @@
         <div class="page-content">
             <div class="page-header">
                 <h1>
-                    添加栏目
+                    栏目列表
                 </h1>
             </div>
             <!-- /.page-header -->
             <div class="row">
                 <div class="col-xs-12">
-                    <form class="form-horizontal" role="form" action="<?php if(isset($_GET['category_id'])): ?><?php echo U('Category/edit_category'); ?><?php else: ?><?php echo U('Category/add_category'); ?><?php endif; ?>" method="post">
-                        <?php if(isset($_GET['category_id'])): ?>
-                            <input type="hidden" name="category_id" value="<?php echo $_GET['category_id']; ?>"/>
-                        <?php endif; ?>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label no-padding-right">
-                                分类名称
-                            </label>
-                            <div class="col-sm-9">
-                                <input type="text" name="category_name" value="<?php echo $category['category_name']; ?>" class="col-xs-10 col-sm-5"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label no-padding-right">
-                                排序
-                            </label>
-                            <div class="col-sm-9">
-                                <input type="text" name="order" placeholder="请填写数字，数字小的排前面" value="<?php echo $category['order']; ?>" class="col-xs-10 col-sm-5"/>
-                            </div>
-                        </div>
-                        <div class="clearfix form-actions">
-                            <div class="col-md-offset-3 col-md-9">
-                                <button class="btn btn-info" type="submit">
-                                    <i class="icon-ok bigger-110">
-                                    </i>
-                                    保存
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    <div class="table-responsive">
+                        <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        名称
+                                    </th>
+                                    <th>
+                                        排序
+                                    </th>
+                                    <th>
+                                        操作
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if(is_array($category_list)):  foreach($category_list as $k=>$v): ?>
+                                    <tr>
+                                        <td>
+                                        <?php echo $v['category_id']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $v['category_name']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $v['order']; ?>
+                                        </td>
+                                        <td>
+                                            <div class="visible-md visible-lg hidden-sm hidden-xs btn-group">
+                                                <a href="<?php echo U('Category/category_form', array('category_id'=>$v['category_id'])); ?>" class="btn btn-xs btn-info">
+                                                    编辑
+                                                </a>
+                                                <a href="<?php echo U('Category/delete_category', array('category_id'=>$v['category_id'])); ?>" class="btn btn-xs btn-danger">
+                                                    删除
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; endif; ?>
+                            </tbody>
+                        </table>
+                        <p>
+                        	<?php echo $page; ?>
+                        </p>
+                    </div>
                 </div>
                 <!-- /.col -->
             </div>

@@ -192,7 +192,6 @@ class IndexController extends Controller{
 			// 先加载系统配置项
 			C(include(CONFIG_PATH . "/config.php"));
 
-
 			// 公共配置项目录
 			$commonConfigPath = COMMON_CONFIG_PATH . "/config.php";
 			// 公共项基本格式

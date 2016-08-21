@@ -95,7 +95,6 @@ class Smarty
         // 将assign分配的变量，保存在数组中的转化为变量
         extract($this->array);
         // 组合模版文件目录
-        // $view_path = $this->view_dir . '/' . $view_path;
         if (!file_exists($view_path)) {
             die('模版文件: ' . $view_path . ' 不存在');
         }

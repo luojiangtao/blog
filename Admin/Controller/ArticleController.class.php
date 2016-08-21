@@ -13,9 +13,6 @@ class ArticleController extends Controller
      */
     public function article_list()
     {
-        // 获取分页
-        $p = isset($_GET['p']) ? $_GET['p'] : 1;
-        $p = $p - 1;
         // 搜索关键字
         $keyword = I('keyword');
         // 防止报错
@@ -115,7 +112,6 @@ class ArticleController extends Controller
             if ($image) {
                 // 补全以前的logo地址
                 $image = "./Upload/" . $image;
-
                 // 删除以前的logo地址
                 @unlink($image);
             }

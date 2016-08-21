@@ -146,6 +146,9 @@ a {
 #navigation .col-xs-1:hover {
     background: #ff7900;
 }
+#navigation .active {
+    background: #ff7900;
+}
 
 
 /*底部导航*/

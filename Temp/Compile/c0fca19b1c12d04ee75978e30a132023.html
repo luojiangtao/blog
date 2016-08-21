@@ -61,7 +61,7 @@
             </a>
             <?php if(is_array($category)):  foreach($category as $k=>$v): ?>
             <a href="<?php echo U('Index/index', array('category_id'=>$v['category_id'])); ?>">
-                <div class="col-xs-1 text-center">
+                <div class="col-xs-1 text-center <?php if(I('category_id')==$v['category_id']): ?>active<?php endif; ?>">
                     <?php echo $v['category_name']; ?>
                 </div>
             </a>
@@ -92,11 +92,8 @@
                             </div>
                             <!-- 列表项结束 -->
                         <?php endforeach; endif; ?>
-                    </div>
-                    <style>
-                        
-                    </style>
-                    <br>
+                    </div> 
+                    <br> 
                     <p class="text-center"><?php echo $page; ?></p>
                     <br>
                 </div>
