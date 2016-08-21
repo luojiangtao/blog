@@ -1,0 +1,11 @@
+/*标题*/
+#article-detail{
+    width: 600px;
+}
+
+#article-content{
+    word-break: break-all;
+}
+#article-content img{
+    max-width: 100% !important;
+}

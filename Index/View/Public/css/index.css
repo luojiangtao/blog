@@ -1,0 +1,10 @@
+#list .red-border:hover {
+    outline: 1px solid #f12403;
+}
+#list .list-text{
+    color: #0b73bb;
+}
+
+#list .list-text:hover {
+    text-decoration: underline;
+}

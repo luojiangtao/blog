@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <include file="Common/header"/>
+            <title>
+                {$article['title']}-罗江涛
+            </title>
+
+            <script type="text/javascript" src="__ROOT__/Common/ueditor/third-party/SyntaxHighlighter/shCore.js"></script>    
+            <link rel="stylesheet" href="__ROOT__/Common/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css" type="text/css" />
+            <link rel="stylesheet" href="__ROOT__/Index/View/Public/css/article_detail.css" type="text/css" />  
+
+            <script>
+            SyntaxHighlighter.all(); //执行代码高亮    
+            </script> 
+        </head>
+        <body>
+            <include file="Common/navigation"/>
+                <div class="container" style="padding: 30px 244px 30px;">
+                    <div id="article-detail">
+                        <h2 class="text-center">{$article['title']}</h2>
+                        <br>
+                        <p class="text-muted text-center">{:date('Y-m-d H:i:s',$article['time'])}　点击量：{$article['click_number']}</p>
+                        <br>
+                        <div id="article-content">
+                            {:htmlspecialchars_decode($article['content'])}
+                        </div>
+                    </div>
+                    
+                </div>
+
+            		<include file="Common/footer"/>
+                </body>
+            </html>

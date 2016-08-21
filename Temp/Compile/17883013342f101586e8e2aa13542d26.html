@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test</title>
+</head>
+<body>
+	<form class="form-horizontal" role="form" action="<?php if(isset($_GET['article_id'])): ?><?php echo U('Article/edit_article'); ?><?php else: ?><?php echo U('Article/add_article'); ?><?php endif; ?>" method="post" enctype="multipart/form-data">
+                        <?php if(isset($_GET['article_id'])): ?>
+                            <input type="hidden" name="article_id" value="<?php echo $_GET['article_id']; ?>"/>
+                        <?php endif; ?>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right">
+                                标题
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" name="title" value="" class="col-xs-10 col-sm-5"/>
+                            </div>
+                        </div>
+                        
+                        <div class="clearfix form-actions">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button class="btn btn-info" type="submit">
+                                    <i class="icon-ok bigger-110">
+                                    </i>
+                                    保存
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+</body>
+</html>
