@@ -121,14 +121,14 @@
 					</script>
 
 						<ul class="nav nav-list">
-						<li class="active">
+						<li <if condition="I('c')=='Index' || I('c')==''">class="active open"</if>>
 							<a href="__APP__">
 								<i class="icon-dashboard"></i>
 								<span class="menu-text"> 控制台 </span>
 							</a>
 						</li>
 
-						<li>
+						<li <if condition="I('c')=='Article'">class="active open"</if>>
 							<a href="#" class="dropdown-toggle">
 								<i class="icon-edit"></i>
 								<span class="menu-text"> 文章管理 </span>
@@ -153,7 +153,7 @@
 							</ul>
 						</li>
 
-						<li>
+						<li <if condition="I('c')=='Category'">class="active open"</if>>
 							<a href="#" class="dropdown-toggle">
 								<i class="icon-list"></i>
 								<span class="menu-text"> 栏目管理 </span>

@@ -121,14 +121,14 @@
 					</script>
 
 						<ul class="nav nav-list">
-						<li class="active">
+						<li <?php if(I('c')=='Index' || I('c')==''): ?>class="active open"<?php endif; ?>>
 							<a href="<?php echo __APP__; ?>">
 								<i class="icon-dashboard"></i>
 								<span class="menu-text"> 控制台 </span>
 							</a>
 						</li>
 
-						<li>
+						<li <?php if(I('c')=='Article'): ?>class="active open"<?php endif; ?>>
 							<a href="#" class="dropdown-toggle">
 								<i class="icon-edit"></i>
 								<span class="menu-text"> 文章管理 </span>
@@ -153,7 +153,7 @@
 							</ul>
 						</li>
 
-						<li>
+						<li <?php if(I('c')=='Category'): ?>class="active open"<?php endif; ?>>
 							<a href="#" class="dropdown-toggle">
 								<i class="icon-list"></i>
 								<span class="menu-text"> 栏目管理 </span>
@@ -207,7 +207,7 @@
                 </li>
                 <li class="active">
                     控制台
-                </li>
+                </li> 
             </ul>
             <!-- .breadcrumb -->
         </div>
@@ -220,7 +220,7 @@
                         </i>
                         系统详情
                     </small>
-                </h1>
+                </h1> 
             </div>
             <!-- /.page-header -->
             <div class="row">
