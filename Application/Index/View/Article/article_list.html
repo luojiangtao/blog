@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="zh-CN">
+    <head>
+        <title> 
+            罗江涛
+        </title>
+        <include file="Common/header"/> 
+        </head>
+        <body class="user-select">
+            <include file="Common/navigation"/>
+                <section class="container">
+                    <div class="content-wrap">
+                        <div class="content" id="aritcle_list">
+                            <div id="focusslide" class="carousel slide" data-ride="carousel">
+                                <ol class="carousel-indicators">
+                                    <li data-target="#focusslide" data-slide-to="0" class="active">
+                                    </li>
+                                    <li data-target="#focusslide" data-slide-to="1">
+                                    </li>
+                                </ol>
+                                <div class="carousel-inner" role="listbox">
+                                    <div class="item active">
+                                        <a href="#" target="_blank" title="木庄网络博客源码" >
+                                            <img src="__ROOT__/Application/Index/View/Public/images//201610181557196870.jpg" alt="木庄网络博客源码" class="img-responsive"/>
+                                        </a>
+                                    </div>
+                                    <div class="item">
+                                        <a href="#" target="_blank" title="专业网站建设" >
+                                            <img src="__ROOT__/Application/Index/View/Public/images//201610241227558789.jpg" alt="专业网站建设" class="img-responsive"/>
+                                        </a>
+                                    </div>
+                                </div>
+                                <a class="left carousel-control" href="#focusslide" role="button" data-slide="prev" rel="nofollow">
+                                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true">
+                                    </span>
+                                    <span class="sr-only">
+                                        上一个
+                                    </span>
+                                </a>
+                                <a class="right carousel-control" href="#focusslide" role="button" data-slide="next" rel="nofollow">
+                                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true">
+                                    </span>
+                                    <span class="sr-only">
+                                        下一个
+                                    </span>
+                                </a>
+                            </div>
+                            <!-- 列表项开始 -->
+                            <foreach name='article' item='v'>
+                                <article class="excerpt excerpt-1" style="">
+                                    <a class="focus" href="{:U($v['article_id'],'', '.html')}" target="_blank" >
+                                        <img class="thumb" data-original="__ROOT__/Upload/{$v['image']}" src="__ROOT__/Upload/{$v['image']}" alt="{$v['title']}"  style="display: inline;"/>
+                                    </a>
+                                    <header>
+                                        <a class="cat" href="{:U($v['article_id'],'', '.html')}" title="MZ-NetBlog主题" >
+                                            {$v['category_name']}
+                                            <i>
+                                            </i>
+                                        </a>
+                                        <h2>
+                                            <a href="{:U($v['article_id'],'', '.html')}" title="{$v['title']}" target="_blank" >
+                                                {$v['title']}
+                                            </a>
+                                        </h2>
+                                    </header>
+                                    <p class="meta">
+                                        <time class="time">
+                                            <i class="glyphicon glyphicon-time">
+                                            </i>
+                                            {:date('Y-m-d H:i:s',$v['time'])}
+                                        </time>
+                                        <span class="views">
+                                            <i class="glyphicon glyphicon-eye-open">
+                                            </i>
+                                            {$v['click_number']}
+                                        </span>
+                                        <a class="comment" href="##comment" title="评论" target="_blank" >
+                                            <i class="glyphicon glyphicon-comment">
+                                            </i>
+                                            4
+                                        </a>
+                                    </p>
+                                    <p class="note">
+                                        描述
+                                    </p>
+                                </article>
+                            </foreach>
+                            <!-- 列表项结束 -->
+                            <!-- vue渲染列表开始 -->
+                                <article class="excerpt excerpt-1" style="" v-for="todo in todos">
+                                    <a class="focus" href="{{ todo.article_detail_url }}" target="_blank" >
+                                        <img class="thumb" data-original="__ROOT__/Upload/{{ todo.image }}" src="__ROOT__/Upload/{{ todo.image }}" alt="{$v['title']}{{ todo.title }}"  style="display: inline;"/>
+                                    </a>
+                                    <header>
+                                        <a class="cat" href="{{ todo.article_detail_url }}" title="MZ-NetBlog主题" >
+                                            {{ todo.category_name }}
+                                            <i>
+                                            </i>
+                                        </a>
+                                        <h2>
+                                            <a href="{{ todo.article_detail_url }}" title="{$v['title']}" target="_blank" >
+                                                {{ todo.title }}
+                                            </a>
+                                        </h2>
+                                    </header>
+                                    <p class="meta">
+                                        <time class="time">
+                                            <i class="glyphicon glyphicon-time">
+                                            </i>
+                                            {{ todo.time }}
+                                        </time>
+                                        <span class="views">
+                                            <i class="glyphicon glyphicon-eye-open">
+                                            </i>
+                                            {{ todo.click_number }}
+                                        </span>
+                                        <a class="comment" href="##comment" title="评论" target="_blank" >
+                                            <i class="glyphicon glyphicon-comment">
+                                            </i>
+                                            4
+                                        </a>
+                                    </p>
+                                    <p class="note">
+                                        描述
+                                    </p>
+                                </article>
+                                <!-- vue渲染列表结束 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            <div class="ias_loader"><div class="pagination-loading"><img src="__ROOT__/Application/Index/View/Public/images/loading.gif"></div></div>
+                            <div class="ias_trigger load_more"><a>查看更多</a></div>
+
+                        </div>
+                    </div>
+                    <include file="Common/right"/>
+                    </section>
+                    <include file="Common/footer"/>
+                    </body>
+                </html>
+
+<script>
+    var page = 0;
+    var article_list_data = {
+            newTodo: '',
+            todos: []
+          };
+    var article_list_vue = new Vue({
+      el: '#aritcle_list'
+    });
+    article_list_vue.$data = article_list_data;
+</script>
+<script>
+/*加载完成后获取文章列表数据*/
+$(document).ready(function(){
+    $('.load_more').click(function() {
+        ajax_get_article_list();
+    });
+
+});
+
+function ajax_get_article_list(){
+    // 获取文章列表
+        $.ajax({
+            type:"post",
+            url:"{:U('Index/Index/ajax_get_article_list')}",
+            dataType : "json",
+            data : {
+                'page': page,
+                'category_id': category_id,
+                'keyword': keyword
+            },
+            success : function(result) {
+                if( result.status == 1 ) {
+                    var list = result.data;
+                    console.log(list);
+                    for( var i = 0; i < list.length; i++ )
+                    {
+                        /*组装数据*/
+                        var article_detail_url = "{:U('Article/article_detail')}";
+                        article_detail_url = article_detail_url+"/article_id/"+list[i].article_id;
+
+                        article_list_vue.todos.push({
+                            category_name:list[i].category_name,
+                            title:list[i].title,
+                            time:list[i].time,
+                            publishTime:list[i].publishTime,
+                            image:list[i].image,
+                            click_number:list[i].click_number,
+                            article_detail_url:article_detail_url
+                        });
+                    }
+                    page += 2;
+                }else{
+                    /*没有结果*/
+                    $('.load_more a').text('没有啦');
+                }
+            },
+            error : function(e){
+                /*获取失败*/
+                console.log(e);
+                $('.load_more a').text('没有啦');
+            }
+        });
+}
+</script>

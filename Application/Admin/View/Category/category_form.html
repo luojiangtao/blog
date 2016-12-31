@@ -1,0 +1,91 @@
+<include file="Common/header.html"/>
+    <div class="main-content">
+        <div class="breadcrumbs" id="breadcrumbs">
+            <script type="text/javascript">
+                try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+            </script>
+            <ul class="breadcrumb">
+                <li>
+                    <i class="icon-home home-icon">
+                    </i>
+                    <a href="#">
+                        首页
+                    </a>
+                </li>
+                <li class="active">
+                    添加栏目
+                </li>
+            </ul>
+            <!-- .breadcrumb -->
+        </div>
+        <div class="page-content">
+            <div class="page-header">
+                <h1>
+                    添加栏目
+                </h1>
+            </div>
+            <!-- /.page-header -->
+            <div class="row">
+                <div class="col-xs-12">
+                    <form class="form-horizontal" role="form" action="<if condition="isset($_GET['category_id'])">{:U('Admin/Category/edit_category')}<else/>{:U('Admin/Category/add_category')}</if>" method="post">
+                        <if condition="isset($_GET['category_id'])">
+                            <input type="hidden" name="category_id" value="{$_GET['category_id']}"/>
+                        </if>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right">
+                                分类名称
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" name="category_name" value="{$category['category_name']}" class="col-xs-10 col-sm-5"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right">
+                                排序
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" name="sort" placeholder="请填写数字，数字小的排前面" value="{$category['sort']}" class="col-xs-10 col-sm-5"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right">
+                                状态
+                            </label>
+                            <div class="col-sm-9">
+                                <select name="status">
+                                        <option value="1"
+                                            <if condition="$category['status']==1">
+                                                selected='selected'
+                                            </if>
+                                            >
+                                            正常
+                                        </option>
+                                        <option value="0"
+                                            <if condition="isset($category['status']) && $category['status']==0">
+                                                selected='selected'
+                                            </if>
+                                            >
+                                            禁用
+                                        </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="clearfix form-actions">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button class="btn btn-info" type="submit">
+                                    <i class="icon-ok bigger-110">
+                                    </i>
+                                    保存
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.page-content -->
+    </div>
+    <!-- /.main-content -->
+    <include file="Common/footer.html"/>

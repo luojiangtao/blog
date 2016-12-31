@@ -8,7 +8,7 @@
  * @param    integer                  $type  [错误代码]
  * @param    [type]                   $dest  [保存日志的路径]
  */
-function halt($error, $level = "ERROR", $type = 3, $dest = null)
+function halt($error, $level = 'ERROR', $type = 3, $dest = null)
 {
     if (is_array($error)) {
         Log::write($error['message'], $level, $type, $dest);
@@ -21,7 +21,7 @@ function halt($error, $level = "ERROR", $type = 3, $dest = null)
     if (DEBUG) {
         if (!is_array($error)) {
             // 运行了哪些文件
-            $trace = debug_backtrace();
+            $trace         = debug_backtrace();
             $e['message']  = $error;
             $e['file']     = $trace[0]['file'];
             $e['line']     = $trace[0]['line'];
@@ -37,11 +37,11 @@ function halt($error, $level = "ERROR", $type = 3, $dest = null)
             $e = $error;
         }
     } else {
-        $e['message'] = "网站出错了，请重试...";
+        $e['message'] = '网站出错了，请重试...';
     }
 
     // 加载并执行错误页面
-    include DATA_PATH . "/View/halt.html";
+    include DATA_PATH . '/View/halt.html';
     die;
 }
 
@@ -58,7 +58,7 @@ function p($array)
     } else if (is_null($array)) {
         var_dump(null);
     } else {
-        echo '<pre style="padding:10px;border-radius:5px;background:#f5f5f5;border;1px solid #ccc;font-size:14px;">';
+        echo "<pre style='padding:10px;border-radius:5px;background:#f5f5f5;border;1px solid #ccc;font-size:14px;'>";
         print_r($array);
         echo '</pre>';
     }
@@ -76,8 +76,12 @@ function redirect($url, $time = 0, $msg = '')
 {
     if (!headers_sent()) {
         // 用header方式跳转
-        $time = 0 ? header("location:" . $url) : header("refresh:{$time};url={$url}");
-        die($msg);
+        // echo $url;die;
+        if($time){
+            header('refresh:{$time};url={$url}');
+        }else{
+            header('location:' . $url);
+        }
     } else {
         // 用meta方式跳转
         echo "<meta http-equiv='Refresh' content='{$time};URL={$url}'>";
@@ -138,35 +142,22 @@ function C($var = null, $value = null)
  * @param    [type]                   $file [方法名]
  * @return   [type]                   $url [生成好的url]
  */
-function U($file, $array=array())
+function U($path, $array = array(), $suffix = '')
 {
-    $url        = '';
-    // 控制器名称
-    $controller = '';
-    // 方法名称
-    $action     = '';
-    if (strstr($file, '/')) {
-        // 如果包涵字符串 /
-        $temp       = explode('/', $file);
-        $controller = $temp[0];
-        $action     = $temp[1];
-    } else {
-        // 如果不包涵字符串 /
-        $controller = CONTROLLER;
-        $action     = $file;
-    }
-
-    // 获取当前url
-    $php_self = substr($_SERVER['PHP_SELF'], strrpos($_SERVER['PHP_SELF'], '/') + 1);
-    // 加上控制器名称和方法名称
-    $url      = $php_self . '?c=' . $controller . '&a=' . $action;
-
+    $url = __ROOT__;
+    // $url = $_SERVER['HTTP_HOST'];
+    // if(strstr($_SERVER['REQUEST_URI'], 'index.php')){
+    //     $url .= '/index.php';
+    // }
+    $url .= '/index.php/' . $path;
     // 如果穿有参数则加在后面
-    if(is_array($array)){
+    if (is_array($array)) {
         foreach ($array as $key => $value) {
-            $url .= '&'.$key.'='.$value;
+            $url .= '/' . $key . '/' . $value;
         }
     }
+
+    $url = $url . $suffix;
     return $url;
 }
 
@@ -201,7 +192,7 @@ function M($table = null)
  */
 function K($modle)
 {
-    $modle = $modle . "Model";
+    $modle = $modle . 'Model';
     return new $modle;
 }
 
@@ -213,8 +204,15 @@ function K($modle)
  * @param    [type]                   $default    [没接收到值时的默认值]
  * @return    string                   $default [接收到的值]
  */
-function I($name, $default='')
+function I($name, $default = '')
 {
-    $value = isset($_REQUEST[$name]) ? $_REQUEST[$name] : $default;
+    $value = $default;
+
+    if (isset($_POST[$name])) {
+        $value = $_POST[$name];
+    } else if (isset($_GET[$name])) {
+        $value = $_GET[$name];
+    }
+
     return htmlspecialchars($value);
 }

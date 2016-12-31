@@ -32,6 +32,12 @@ class Page
 
     public function __construct($count, $page_size)
     {
+        if(!$count){
+            $this->count = 0; 
+            $this->start_row = 0; 
+            $this->page_size = 0; 
+            return ;
+        }
         if($count<=$page_size){
             $page_size=$count;
         }
@@ -71,6 +77,9 @@ class Page
 
     public function show()
     {
+        if(!$this->count){
+            return ;
+        }
         // 自带分页样式，仿造猪八戒网站分页
         $page_html = '
             <style>

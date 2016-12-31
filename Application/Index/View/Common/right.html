@@ -1,0 +1,68 @@
+<aside class="sidebar">
+    <div class="fixed">
+        <div class="widget widget_search">
+            <form class="navbar-form" action="{:U('Index/Index/index')}" method="get">
+                <div class="input-group">
+                    <input type="text" name="keyword" value="{:I('keyword')}" class="form-control" size="35" placeholder="请输入关键字" maxlength="15" autocomplete="off"/>
+                    <span class="input-group-btn">
+                        <button class="btn btn-default btn-search" type="submit">
+                            搜索
+                        </button>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="widget widget_hot">
+        <h3>
+            点击排行
+        </h3>
+        <?php
+            // 获取文章
+            $click_sort_article=M('article')->
+            where('status=1')->
+            field('article_id,title,time,image,click_number')->
+            order('click_number DESC')->
+            limit('10')->
+            select();
+        ?>
+        <ul>
+            <foreach name='click_sort_article' item='v'>
+                <li>
+                    <a title="{$v['title']}" href="{:U($v['article_id'],'', '.html')}" target="_blank" >
+                        <span class="thumbnail">
+                            <img class="thumb" data-original="__ROOT__/Upload/{$v['image']}" src="__ROOT__/Upload/{$v['image']}" alt="{$v['title']}"  style="display: block;"/>
+                        </span>
+                        <span class="text">
+                            {$v['title']}
+                        </span>
+                        <span class="muted">
+                            <i class="glyphicon glyphicon-time">
+                            </i>
+                            {:date('Y-m-d',$v['time'])}
+                        </span>
+                        <span class="muted">
+                            <i class="glyphicon glyphicon-eye-open">
+                            </i>
+                            {$v['click_number']}
+                        </span>
+                    </a>
+                </li>
+            </foreach>
+        </ul>
+    </div>
+    <div class="widget widget_sentence">
+        <h3>
+            友情链接
+        </h3>
+        <div class="widget-sentence-link">
+            <a href="http://php.luojiangtao.com" title="网站建设" target="_blank" >
+                luojiangtaoPHP
+            </a> 
+            <a href="http://luojiangtao.com/jianli.pdf" title="网站建设" target="_blank" >
+                简历下载
+            </a>
+            &nbsp;&nbsp;&nbsp;
+        </div>
+    </div>
+</aside>

@@ -1,6 +1,0 @@
-<IfModule mod_rewrite.c>
-	RewriteEngine on
-	#301重定向，无www跳转到有www的域名下    
-    RewriteCond %{HTTP_HOST} ^luojiangtao.com [NC]
-    RewriteRule ^(.*)$ http://www.luojiangtao.com/$1 [L,R=301]
-</IfModule>

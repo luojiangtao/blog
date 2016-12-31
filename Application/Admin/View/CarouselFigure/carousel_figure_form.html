@@ -1,0 +1,77 @@
+<include file="Common/header.html"/>
+    <div class="main-content">
+        <div class="breadcrumbs" id="breadcrumbs">
+            <script type="text/javascript">
+                try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+            </script>
+            <ul class="breadcrumb">
+                <li>
+                    <i class="icon-home home-icon">
+                    </i>
+                    <a href="#">
+                        首页
+                    </a>
+                </li>
+                <li class="active">
+                    添加轮播图
+                </li>
+            </ul>
+            <!-- .breadcrumb -->
+        </div>
+        <div class="page-content">
+            <div class="page-header">
+                <h1>
+                    添加轮播图
+                </h1>
+            </div>
+            <!-- /.page-header -->
+            <div class="row">
+                <div class="col-xs-12">
+                    <form class="form-horizontal" role="form" action="<if condition="isset($_GET['carousel_figure_id'])">{:U('Admin/CarouselFigure/edit_carousel_figure')}<else/>{:U('Admin/CarouselFigure/add_carousel_figure')}</if>" method="post" enctype="multipart/form-data">
+                        <if condition="isset($_GET['carousel_figure_id'])">
+                            <input type="hidden" name="carousel_figure_id" value="{$_GET['carousel_figure_id']}"/>
+                        </if>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right">
+                                轮播图
+                            </label>
+                            <div class="col-sm-9">
+                                   <input type="file" name="image" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right">
+                                链接
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" name="url" placeholder="点击图片后跳转到哪" value="{$carousel_figure['url']}" class="col-xs-10 col-sm-5"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right">
+                                排序
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" name="sort" placeholder="请填写数字，数字小的排前面" value="{$carousel_figure['sort']}" class="col-xs-10 col-sm-5"/>
+                            </div>
+                        </div>
+                        
+                        <div class="clearfix form-actions">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button class="btn btn-info" type="submit">
+                                    <i class="icon-ok bigger-110">
+                                    </i>
+                                    保存
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.page-content -->
+    </div>
+    <!-- /.main-content -->
+    <include file="Common/footer.html"/>

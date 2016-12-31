@@ -24,17 +24,17 @@ class Upload
         }
         $message = '';
         switch ($_FILES[$input_name]['error']) {
-            case 4:$message .= "没有文件被上传";
+            case 4:$message .= '没有文件被上传';
                 break;
-            case 3:$message .= "文件只有部分被上传";
+            case 3:$message .= '文件只有部分被上传';
                 break;
-            case 2:$message .= "上传文件的大小超过了HTML表单中MAX_FILE_SIZE选项指定的值";
+            case 2:$message .= '上传文件的大小超过了HTML表单中MAX_FILE_SIZE选项指定的值';
                 break;
-            case 1:$message .= "上传的文件超过了php.ini中upload_max_filesize选项限制的值";
+            case 1:$message .= '上传的文件超过了php.ini中upload_max_filesize选项限制的值';
                 break;
-            case 0:$message .= "上传成功";
+            case 0:$message .= '上传成功';
                 break;
-            default:$message .= "未知错误";
+            default:$message .= '未知错误';
         }
         // 文件后缀名
         $ext      = strchr($_FILES[$input_name]['name'], '.');

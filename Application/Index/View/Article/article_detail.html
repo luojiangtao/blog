@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="zh-CN">
+    <head>
+        <title>
+            {$article['title']}-罗江涛
+        </title>
+        <include file="Common/header"/>
+        <script type="text/javascript" src="__ROOT__/Application/Common/ueditor/third-party/SyntaxHighlighter/shCore.js"></script>    
+        <link rel="stylesheet" href="__ROOT__/Application/Common/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css" type="text/css" />
+        <script>
+        SyntaxHighlighter.all(); //执行代码高亮    
+        </script> 
+    </head>
+    <body class="user-select single">
+        <include file="Common/navigation"/>
+        <section class="container">
+            <div class="content-wrap">
+                <div class="content">
+                    <header class="article-header">
+                        <h1 class="article-title">
+                                {$article['title']} 
+                        </h1>
+                        <div class="article-meta">
+                            <span class="item article-meta-time">
+                                <time class="time" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="发表时间：2016-10-14">
+                                    <i class="glyphicon glyphicon-time">
+                                    </i>
+                                    {:date('Y-m-d H:i:s',$article['time'])}
+                                </time>
+                            </span>
+                            <span class="item article-meta-source" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="来源：木庄网络博客">
+                                <i class="glyphicon glyphicon-globe">
+                                </i>
+                                罗江涛
+                            </span>
+                            <span class="item article-meta-category" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="MZ-NetBlog主题">
+                                <i class="glyphicon glyphicon-list">
+                                </i>
+                                <a href="#" title="MZ-NetBlog主题" >
+                                    {$article['category_name']}
+                                </a>
+                            </span>
+                            <span class="item article-meta-views" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="浏览量：219">
+                                <i class="glyphicon glyphicon-eye-open">
+                                </i>
+                                {$article['click_number']}
+                            </span>
+                            <span class="item article-meta-comment" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="评论量">
+                                <i class="glyphicon glyphicon-comment">
+                                </i>
+                                {$article['comment_number']}
+                            </span>
+                        </div>
+                    </header>
+                    <article class="article-content" style="word-break: break-all;">
+                        {:htmlspecialchars_decode($article['content'])}
+                    </article>
+                    <div class="article-tags">
+                        标签：
+                        <foreach name='tags_array' item='v'>
+                            <a>
+                                {$v}
+                            </a>
+                        </foreach> 
+                    </div>
+                    <div class="relates">
+                        <div class="title">
+                            <h3>
+                                相关推荐
+                            </h3>
+                        </div>
+                        <ul>
+                            <foreach name='recommend_article' item='v'>
+                            <li>
+                                <a href="{:U($v['article_id'],'', '.html')}" >
+                                    {$v['title']}
+                                </a>
+                            </li>
+                            </foreach>
+                            
+                        </ul>
+                    </div>
+                    <div class="title" id="comment">
+                        <h3>
+                            评论
+                        </h3>
+                    </div>
+                    <div id="respond">
+                        <form id="comment-form" name="comment-form" action="{:U('Index/Comment/add_comment')}" method="POST">
+                            <input type="hidden" name="article_id" value="{:I('article_id')}">
+                            <div class="comment">
+                                <input name="nickname" id="" class="form-control" size="22" placeholder="您的昵称（必填）" maxlength="15" autocomplete="off" tabindex="1" type="text" required />
+                                <input name="email" id="" class="form-control" size="22" placeholder="您的网址或邮箱（非必填）" maxlength="58" autocomplete="off" tabindex="2" type="text"/>
+                                <div class="comment-box">
+                                    <textarea placeholder="您的评论或留言（必填）" name="content" id="comment-textarea" cols="100%" rows="3" tabindex="3" required></textarea>
+                                    <div class="comment-ctrl">
+                                        <button type="submit" id="comment-submit">
+                                            评论
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="postcomments">
+                        <ol id="comment_list" class="commentlist">
+                            <foreach name='comment' item='v'>
+                            <li class="comment-content">
+                                <span class="comment-f">
+                                    #{$v['comment_id']}
+                                </span>
+                                <div class="comment-main">
+                                    <p>
+                                        <a class="address" href="#" rel="nofollow" target="_blank">
+                                            {$v['nickname']}
+                                        </a>
+                                        <span class="time">
+                                            ({:date('Y-m-d H:i:s',$v['time'])})
+                                        </span>
+                                        <br/>
+                                        {$v['content']}
+                                    </p>
+                                </div>
+                            </li>
+                            </foreach>
+                            
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <include file="Common/right"/>
+        </section>
+        <include file="Common/footer"/>
+    </body>
+</html>
