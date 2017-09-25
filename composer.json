@@ -1,0 +1,14 @@
+{
+    "name": "luojiangtao/blog",
+    "description": "blog develop by luojiangtaoPHP",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "luojiangtao",
+            "email": "1368761119@qq.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
